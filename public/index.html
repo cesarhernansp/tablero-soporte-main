@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa de ayuda</title>
+  <!-- Tailwind por CDN: hace falta internet para que carguen los estilos -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="app.js" defer></script>
+</head>
+<!--
+  Esta página todavía no tiene ninguna clase de Tailwind, por eso se ve
+  tan plana. Darle forma es el nivel 0 del enunciado.
+  Puedes añadir clases y contenedores, pero no cambies los id: app.js
+  depende de ellos.
+-->
+<body>
+
+  <header>
+    <h1>Mesa de ayuda</h1>
+    <p>Tickets de soporte de la oficina</p>
+  </header>
+
+  <main>
+
+    <div class="grid lg:grid-cols-2">
+    <!-- Formulario: crea tickets y, desde el nivel 4, también los edita -->
+    <section class="justify-start border-solid border-4 p-2" >
+      <h2 id="titulo-formulario">Nuevo ticket</h2>
+
+      <form id="form-ticket" novalidate>
+        <div class="grid grid-col-3 ">
+        <label for="titulo">Título</label>
+          <input id="titulo" name="titulo" type="text" class="px-2 border-dashed border-2">
+          <p id="error-titulo"></p>
+
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" name="descripcion" rows="3" class="px-2 border-dashed border-2"></textarea>
+
+          <label for="solicitante">Solicitante</label>
+          <input id="solicitante" name="solicitante" type="text" class="px-2 border-dashed border-2">
+          <p id="error-solicitante"></p>
+        </div>
+
+        <div class="flex flex-wrap mt-5 gap-5 items-center ">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" name="categoria " class="p-2 rounded-full bg-green-300 hover:bg-green-500 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-green-800">
+            <option value="hardware">Hardware</option>
+            <option value="software">Software</option>
+            <option value="red">Red</option>
+            <option value="accesos">Accesos</option>
+          </select>
+
+          <label for="prioridad">Prioridad</label>
+          <select id="prioridad" name="prioridad" class="p-2 rounded-full bg-green-300 hover:bg-green-500 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-green-800">
+            <option value="baja">Baja</option>
+            <option value="media" selected>Media</option>
+            <option value="alta">Alta</option>
+          </select>
+          
+          <button id="btn-guardar" type="submit" class="p-2 rounded-full bg-green-300 hover:bg-green-500 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-green-800">Crear ticket</button>
+          <button id="btn-cancelar" type="button" class="p-2 rounded-full bg-sky-300 hover:bg-sky-500 hidden">Cancelar edición</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Tablero -->
+    <section class="border-solid border-2 p-2">
+      <h2>Tickets</h2>
+
+      <div id="resumen"></div>
+
+      <div class="flex flex-col items-start md:flex-row gap-5 md:items-center">
+        <label for="filtro-estado">Estado</label>
+        <select id="filtro-estado" class="p-2 rounded-full bg-green-300 hover:bg-green-500 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-green-800">
+          <option value="todos">Todos</option>
+          <option value="abierto">Abiertos</option>
+          <option value="en_progreso">En progreso</option>
+          <option value="resuelto">Resueltos</option>
+        </select>
+
+        <label for="busqueda">Buscar</label>
+        <input id="busqueda" type="search" placeholder="Buscar por título " class="p-2 border-dashed border-2">
+      </div>
+
+      <p id="mensaje"></p>
+
+      <div id="lista-tickets" class="grid grid-cols md:grid-cols-2"></div>
+    </section>
+  </div>
+  </main>
+
+</body>
+</html>
